@@ -7,12 +7,12 @@ import os
 load_dotenv()
 
 # Spotify API credentials from .env
-CLIENT_ID = os.getenv('SPOTIPY_CLIENT_ID')
-CLIENT_SECRET = os.getenv('SPOTIPY_CLIENT_SECRET')
+CLIENT_ID = os.getenv('SPOTIPY_CLIENT_ID_FOR_TOP_500')
+CLIENT_SECRET = os.getenv('SPOTIPY_CLIENT_SECRET_FOR_TOP_500')
 REDIRECT_URI = os.getenv('SPOTIPY_REDIRECT_URI')
 
 # Scope required to access user's playlists and liked songs
-SCOPE = 'playlist-read-private user-library-modify user-top-read playlist-modify-public'
+SCOPE = 'playlist-modify-public playlist-modify-private playlist-read-private user-library-modify user-top-read'
 
 # Authenticate and get the access token
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=CLIENT_ID,
@@ -23,6 +23,10 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=CLIENT_ID,
 # Get the current user's profile (to retrieve user ID)
 user_id = sp.current_user()['id']
 
+# Use the user_id for the cache path
+cache_path = f".cache-{user_id}"
+
+# Now you can proceed with the rest of the logic
 # Get top 500 tracks (Spotify API allows fetching top tracks in chunks of 50)
 top_tracks = []
 limit = 50

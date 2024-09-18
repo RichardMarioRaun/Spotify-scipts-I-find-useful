@@ -31,6 +31,7 @@ Before running any of the scripts, ensure you have the following:
    - SPOTIPY_CLIENT_ID='your_spotify_client_id'
    - SPOTIPY_CLIENT_SECRET='your_spotify_client_secret'
    - SPOTIPY_REDIRECT_URI='http://localhost:8888/callback'
+   # NB! It seems to me that every script needs a separate app, and aslo separate CLIENT_ID and CLIENT_SECRET.
 
 ## Scripts Overview
 
