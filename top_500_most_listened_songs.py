@@ -1,13 +1,18 @@
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
+from dotenv import load_dotenv
+import os
 
-# Spotify API credentials
-CLIENT_ID = 'your_client_id'  # Replace with your client ID
-CLIENT_SECRET = 'your_client_secret'  # Replace with your client secret
-REDIRECT_URI = 'http://localhost:8888/callback'  # Replace with your redirect URI
+# Load environment variables from .env file
+load_dotenv()
 
-# Scope required to access user's top tracks and modify playlists
-SCOPE = 'user-top-read playlist-modify-public playlist-modify-private'
+# Spotify API credentials from .env
+CLIENT_ID = os.getenv('SPOTIPY_CLIENT_ID')
+CLIENT_SECRET = os.getenv('SPOTIPY_CLIENT_SECRET')
+REDIRECT_URI = os.getenv('SPOTIPY_REDIRECT_URI')
+
+# Scope required to access user's playlists and liked songs
+SCOPE = 'playlist-read-private user-library-modify user-top-read playlist-modify-public'
 
 # Authenticate and get the access token
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=CLIENT_ID,
